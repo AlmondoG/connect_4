@@ -199,6 +199,15 @@ body {
     border: 2px solid black;
     padding: 18%;
     cursor: pointer;
+    -webkit-transition-property: opacity;
+    -webkit-transition-duration: 0.5s;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+}
+
+.ares:hover, .artemis:hover, .athena:hover, .poseidon:hover {
+    background-color:black;
+    opacity: .5;
 }
 
 .ares {
