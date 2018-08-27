@@ -3,6 +3,7 @@ $(document).ready(function() { //adds click handlers after DOM loads
 });
 
 function readyPageFunctions () {
+    $(".resetButton").hide();
     $(".choose-god-page").hide();
     $(window).on("load", function() {
         setTimeout(function() {
@@ -60,7 +61,11 @@ function readyPageFunctions () {
 
     $(".togglePlayerNumber").on('click', function() {
         togglePlayerMode();
-    });    
+    });
+
+    $(".resetButton").on('click', function() {
+        resetChooseGodPage();
+    });
 }
 
 var playerSwitch = 2;
@@ -72,6 +77,7 @@ var gameArray = [[null, null, null, null, null, null, null], [null, null, null, 
     [null, null, null, null, null, null, null], [null, null, null, null, null, null, null], [null, null, null, null, null, null, null]];
 var columnNumber = null;
 var playerModeToggle = 1;
+var toggleAICount = 0;
 
 /* Game modes start */
 function togglePlayerMode() {
@@ -87,12 +93,14 @@ function togglePlayerMode() {
     toggleAICount = 0;
 }
 
-var toggleAICount = 0;
+
 function toggleAI() { //toggles whether AI should be on/off    //if toggle ai === 0, then it's off. if toggle ai ===1, it's on
     toggleAICount = 1 - toggleAICount;
-    $('.title').text("Choose your diety and play with the Gods.");
+    $(".toggleAI, .togglePlayerNumber").hide();
+    $(".resetButton").show();
+    $('.title').text("Choose your deity and play with the Gods.");
     if (toggleAICount === 0 ) {
-        $('.title').text("Player One: Select Your Diety");
+        $('.title').text("Player One: Select Your Deity");
     }
     playerModeToggle = 1; //occurs so you can't have player 3 mode on AI
     $('.togglePlayerNumber').text("THREE PLAYER MODE");
@@ -118,11 +126,12 @@ function playerGod() {
     $(this).addClass("gray");
     $(this).off("click");
     $(".toggleAI, .togglePlayerNumber").hide();
+    $(".resetButton").show();
     playerSwitch--;
     if (playerSwitch === 1 && toggleAICount === 0) { //if toggle ai === 0, then it's off. if toggle ai ===1, it's on
-        $('.title').text("Player Two: Choose Your Diety");
+        $('.title').text("Player Two: Choose Your Deity");
     } else if (playerSwitch === 0 && toggleAICount === 0) {
-        $('.title').text("Player Three: Choose Your Diety");
+        $('.title').text("Player Three: Choose Your Deity");
     }
     if (toggleAICount === 1 && victoryTrigger === 0) { //if AI mode is on, runs function that allows AI to randomly choose god
         aiSelectGod();
@@ -133,6 +142,21 @@ function playerGod() {
         $('.gameTitle').text("Player One's Turn");
         playerSwitch = 2;
     }
+}
+
+function resetChooseGodPage() {
+    playerSwitch = 2;
+    playerOneGod = null;
+    playerTwoGod = null;
+    playerThreeGod = null;
+    playerModeToggle = 1;
+    toggleAICount = 0;
+    $(".title").text("Player One: Select Your Deity");
+    $('.togglePlayerNumber').text("THREE PLAYER MODE");
+    $(".ares, .artemis, .athena, .poseidon").on("click");
+    $(".ares, .artemis, .athena, .poseidon").removeClass("gray");
+    $(".toggleAI, .togglePlayerNumber").show();
+    $(".resetButton").hide();
 }
 
 function aiSelectGod() { // Allows AI to pick random god after player one chooses god
