@@ -3,23 +3,23 @@
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
+    /*width: 100vw;*/
+    /*height: 100vh;*/
     margin: 0;
     background-image: url('images/mt_olympus_background.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
-.header{
-    width:100vw;
-    height: 12vh;
-    background-color: transparent;
-}
-
 .gameHeader {
     width:100%;
     height: 10%;
+    background-color: transparent;
+}
+
+.header {
+    width: 100%;
+    margin: 5px 0;
     background-color: transparent;
 }
 
@@ -66,13 +66,6 @@ body {
 }
 
 
-.header {
-    width: 100%;
-    height: 20%;
-    background-color: transparent;
-}
-
-
 
 @font-face {
     font-family: diogenes;
@@ -90,7 +83,7 @@ body {
 .toggleAI {
     height: 10%;
     color: white;
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: bold;
     text-shadow: 2px 2px 8px black;
     background-color: black;
@@ -112,7 +105,7 @@ body {
 
 .togglePlayerNumber {
     color: white;
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: bold;
     text-shadow: 2px 2px 8px black;
     background-color: black;
@@ -138,22 +131,24 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    text-align: center;
     font-size:2em;
     font-family: diogenes;
     color: white;
     height: 60%;
-    text-shadow: 0 0 10px black;
+    text-shadow: 2px 2px 5px black;
 }
 .mainTitle{
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     font-size:3em;
     font-family: diogenes;
     color: white;
     height: 60%;
-    text-shadow: 0 0 10px black;
+    text-shadow: 2px 2px 5px black;
 }
 
 .gameTitle {
@@ -165,7 +160,7 @@ body {
     font-family: diogenes;
     color: white;
     height: 100%;
-    text-shadow: 0 0 10px black;
+    text-shadow: 2px 2px 5px black;
 }
 
 .god-section {
@@ -194,6 +189,7 @@ body {
     color: black;
     font-size: 2em;
     font-family: diogenes;
+    text-shadow: 2px 2px 5px white;
 }
 
 .ares, .artemis, .athena, .poseidon {
@@ -375,4 +371,49 @@ body {
     z-index: -1;
     opacity: .8;
     border-radius: 10%;
+}
+
+
+
+.loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+@media (max-width: 790px) {
+    .toggleAI, .togglePlayerNumber {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 547px) {
+    .toggleAI, .togglePlayerNumber {
+        font-size: 0.5em;
+    }
+    .name {
+        font-size: 1em;
+    }
 }
