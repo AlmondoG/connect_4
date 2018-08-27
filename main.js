@@ -3,6 +3,13 @@ $(document).ready(function() { //adds click handlers after DOM loads
 });
 
 function readyPageFunctions () {
+    $(".choose-god-page").hide();
+    $(window).on("load", function() {
+        setTimeout(function() {
+            $(".loader").hide();
+            $(".choose-god-page").show();
+        }, 1000);
+    });
     $(".ares").on("click", playerGod);
     $(".artemis").on("click", playerGod);
     $(".athena").on("click", playerGod);
@@ -72,8 +79,8 @@ function togglePlayerMode() {
     $('.togglePlayerNumber').text("TWO PLAYER MODE");
     playerModeToggle = 1 - playerModeToggle; //if playerModeToggle === 0; three player mode activates; else two player mode;
     if (playerModeToggle === 1) {
-        playScream();
-        playFire();
+        // playScream();
+        // playFire();
         $('.title').text("Third Player Sacrificed. Player One: Select Your Deity.");
         $('.togglePlayerNumber').text("THREE PLAYER MODE");
     }
@@ -323,7 +330,7 @@ function checkDraw() {
 //Modal display, hide, and exit functions
 var godVictoryName = null;
 function modalWin() {
-    playChoir()
+    // playChoir()
     victoryTrigger = 1; //disables ai from making actions
     $('.gameTitle').text("The Game Is Over");
     victoryName();
