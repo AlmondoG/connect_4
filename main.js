@@ -64,7 +64,7 @@ function readyPageFunctions () {
     });
 
     $(".resetButton").on('click', function() {
-        resetChooseGodPage();
+        resetGame();
     });
 }
 
@@ -144,20 +144,20 @@ function playerGod() {
     }
 }
 
-function resetChooseGodPage() {
-    playerSwitch = 2;
-    playerOneGod = null;
-    playerTwoGod = null;
-    playerThreeGod = null;
-    playerModeToggle = 1;
-    toggleAICount = 0;
-    $(".title").text("Player One: Select Your Deity");
-    $('.togglePlayerNumber').text("THREE PLAYER MODE");
-    $(".ares, .artemis, .athena, .poseidon").on("click");
-    $(".ares, .artemis, .athena, .poseidon").removeClass("gray");
-    $(".toggleAI, .togglePlayerNumber").show();
-    $(".resetButton").hide();
-}
+// function resetChooseGodPage() {
+//     playerSwitch = 2;
+//     playerOneGod = null;
+//     playerTwoGod = null;
+//     playerThreeGod = null;
+//     playerModeToggle = 1;
+//     toggleAICount = 0;
+//     $(".title").text("Player One: Select Your Deity");
+//     $('.togglePlayerNumber').text("THREE PLAYER MODE");
+//     $(".ares, .artemis, .athena, .poseidon").on("click", playerGod);
+//     $(".ares, .artemis, .athena, .poseidon").removeClass("gray");
+//     $(".toggleAI, .togglePlayerNumber").show();
+//     $(".resetButton").hide();
+// }
 
 function aiSelectGod() { // Allows AI to pick random god after player one chooses god
     var godArray = [$(".ares").css("background-image"), $(".artemis").css("background-image"), $(".athena").css("background-image"), $(".poseidon").css("background-image")];
@@ -422,6 +422,7 @@ function resetGame() { //function that resets the game, including player gods an
     $(".modal-shadow").addClass("hidden-modal");
     $('.choose-god-page').show();
     $('.game_area').hide();
+    $(".resetButton").hide();
     $('.title').text("Player One: Choose Your Diety");
     $('.hades-modal-shadow').addClass('hidden-modal');
     $(".toggleAI, .togglePlayerNumber").show();
