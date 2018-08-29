@@ -66,6 +66,18 @@ function readyPageFunctions () {
     $(".resetButton").on('click', function() {
         resetGame();
     });
+
+    $('.col').hover(highlight, unHighlight);
+}
+
+function highlight() {
+    var currentCol = this.classList[1];
+    $(`.${currentCol}`).addClass('glow');
+}
+
+function unHighlight() {
+    var currentCol = this.classList[1];
+    $(`.${currentCol}`).removeClass('glow');
 }
 
 var playerSwitch = 2;
@@ -78,6 +90,8 @@ var gameArray = [[null, null, null, null, null, null, null], [null, null, null, 
 var columnNumber = null;
 var playerModeToggle = 1;
 var toggleAICount = 0;
+var drawTrigger = 0;
+var godVictoryName = null;
 
 /* Game modes start */
 function togglePlayerMode() {
@@ -144,20 +158,6 @@ function playerGod() {
     }
 }
 
-// function resetChooseGodPage() {
-//     playerSwitch = 2;
-//     playerOneGod = null;
-//     playerTwoGod = null;
-//     playerThreeGod = null;
-//     playerModeToggle = 1;
-//     toggleAICount = 0;
-//     $(".title").text("Player One: Select Your Deity");
-//     $('.togglePlayerNumber').text("THREE PLAYER MODE");
-//     $(".ares, .artemis, .athena, .poseidon").on("click", playerGod);
-//     $(".ares, .artemis, .athena, .poseidon").removeClass("gray");
-//     $(".toggleAI, .togglePlayerNumber").show();
-//     $(".resetButton").hide();
-// }
 
 function aiSelectGod() { // Allows AI to pick random god after player one chooses god
     var godArray = [$(".ares").css("background-image"), $(".artemis").css("background-image"), $(".athena").css("background-image"), $(".poseidon").css("background-image")];
@@ -305,7 +305,44 @@ function checkHorizontalWin(someArray){
     for(var checkRow = someArray.length-1; checkRow >= 0; checkRow--){
         for(var checkInnerRow = 0; checkInnerRow < someArray[checkRow].length; checkInnerRow++){
             if(someArray[checkRow][checkInnerRow] != null && someArray[checkRow][checkInnerRow] === someArray[checkRow][checkInnerRow + 1] && someArray[checkRow][checkInnerRow + 1] === someArray[checkRow][checkInnerRow + 2] && someArray[checkRow][checkInnerRow + 2] === someArray[checkRow][checkInnerRow + 3]){
-                modalWin();
+                $('.gameTitle').text("The Game Is Over");
+                $(".col0").off("click");
+                $(".col1").off("click");
+                $(".col2").off("click");
+                $(".col3").off("click");
+                $(".col4").off("click");
+                $(".col5").off("click");
+                $(".col6").off("click");
+                victoryTrigger = 1;
+                console.log($(`.row${checkRow} .col${checkInnerRow}`).css("background-image"));
+                var newBackground = $(`.row${checkRow} .col${checkInnerRow}`).css("background-image");
+                var newerBackground = newBackground.replace('url(','').replace(')','').replace(/\"/gi, "");
+                console.log(newerBackground);
+                if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Athena.jpg") {
+                    $(`.row${checkRow} .col${checkInnerRow}`).addClass("athenaWins");
+                    $(`.row${checkRow} .col${checkInnerRow + 1}`).addClass("athenaWins");
+                    $(`.row${checkRow} .col${checkInnerRow + 2}`).addClass("athenaWins");
+                    $(`.row${checkRow} .col${checkInnerRow + 3}`).addClass("athenaWins");
+                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Poseidon.jpg") {
+                    $(`.row${checkRow} .col${checkInnerRow}`).addClass("poseidonWins");
+                    $(`.row${checkRow} .col${checkInnerRow + 1}`).addClass("poseidonWins");
+                    $(`.row${checkRow} .col${checkInnerRow + 2}`).addClass("poseidonWins");
+                    $(`.row${checkRow} .col${checkInnerRow + 3}`).addClass("poseidonWins");
+                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Artemis.jpg") {
+                    $(`.row${checkRow} .col${checkInnerRow}`).addClass("artemisWins");
+                    $(`.row${checkRow} .col${checkInnerRow + 1}`).addClass("artemisWins");
+                    $(`.row${checkRow} .col${checkInnerRow + 2}`).addClass("artemisWins");
+                    $(`.row${checkRow} .col${checkInnerRow + 3}`).addClass("artemisWins");
+                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Ares.jpg") {
+                    $(`.row${checkRow} .col${checkInnerRow}`).addClass("aresWins");
+                    $(`.row${checkRow} .col${checkInnerRow + 1}`).addClass("aresWins");
+                    $(`.row${checkRow} .col${checkInnerRow + 2}`).addClass("aresWins");
+                    $(`.row${checkRow} .col${checkInnerRow + 3}`).addClass("aresWins");
+                }
+                setTimeout(function() {
+                    modalWin();
+                }, 1500);
+                // modalWin();
             }
         }
     }
@@ -314,7 +351,44 @@ function checkVerticalWin(someArray){
     for(var checkRow = someArray.length-1; checkRow >= 4; checkRow--){
         for(var checkInnerRow = 0; checkInnerRow < someArray[checkRow].length; checkInnerRow++){
             if(someArray[checkRow][checkInnerRow] != null && someArray[checkRow][checkInnerRow] === someArray[checkRow-1][checkInnerRow] && someArray[checkRow-1][checkInnerRow] === someArray[checkRow-2][checkInnerRow] && someArray[checkRow-2][checkInnerRow] === someArray[checkRow-3][checkInnerRow]){
-                modalWin();
+                $('.gameTitle').text("The Game Is Over");
+                $(".col0").off("click");
+                $(".col1").off("click");
+                $(".col2").off("click");
+                $(".col3").off("click");
+                $(".col4").off("click");
+                $(".col5").off("click");
+                $(".col6").off("click");
+                victoryTrigger = 1;
+                console.log($(`.row${checkRow} .col${checkInnerRow}`).css("background-image"));
+                var newBackground = $(`.row${checkRow} .col${checkInnerRow}`).css("background-image");
+                var newerBackground = newBackground.replace('url(','').replace(')','').replace(/\"/gi, "");
+                console.log(newerBackground);
+                if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Athena.jpg") {
+                    $(`.row${checkRow} .col${checkInnerRow}`).addClass("athenaWins");
+                    $(`.row${checkRow - 1} .col${checkInnerRow}`).addClass("athenaWins");
+                    $(`.row${checkRow - 2} .col${checkInnerRow}`).addClass("athenaWins");
+                    $(`.row${checkRow - 3} .col${checkInnerRow}`).addClass("athenaWins");
+                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Poseidon.jpg") {
+                    $(`.row${checkRow} .col${checkInnerRow}`).addClass("poseidonWins");
+                    $(`.row${checkRow - 1} .col${checkInnerRow}`).addClass("poseidonWins");
+                    $(`.row${checkRow - 2} .col${checkInnerRow}`).addClass("poseidonWins");
+                    $(`.row${checkRow - 3} .col${checkInnerRow}`).addClass("poseidonWins");
+                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Artemis.jpg") {
+                    $(`.row${checkRow} .col${checkInnerRow}`).addClass("artemisWins");
+                    $(`.row${checkRow - 1} .col${checkInnerRow}`).addClass("artemisWins");
+                    $(`.row${checkRow - 2} .col${checkInnerRow}`).addClass("artemisWins");
+                    $(`.row${checkRow - 3} .col${checkInnerRow}`).addClass("artemisWins");
+                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Ares.jpg") {
+                    $(`.row${checkRow} .col${checkInnerRow}`).addClass("aresWins");
+                    $(`.row${checkRow - 1} .col${checkInnerRow}`).addClass("aresWins");
+                    $(`.row${checkRow - 2} .col${checkInnerRow}`).addClass("aresWins");
+                    $(`.row${checkRow - 3} .col${checkInnerRow}`).addClass("aresWins");
+                }
+                setTimeout(function() {
+                    modalWin();
+                }, 1500);
+                // modalWin();
             }
         }
     }
@@ -323,18 +397,92 @@ function checkDiagonalWin(someArray){
     for(var checkRow = someArray.length-1; checkRow >= 4; checkRow--){
         for(var checkInnerRowUpRight = 0; checkInnerRowUpRight < 4; checkInnerRowUpRight++){
             if(someArray[checkRow][checkInnerRowUpRight] !== null && someArray[checkRow][checkInnerRowUpRight] === someArray[checkRow-1][checkInnerRowUpRight+1] && someArray[checkRow-1][checkInnerRowUpRight+1] === someArray[checkRow-2][checkInnerRowUpRight+2] && someArray[checkRow-2][checkInnerRowUpRight+2] === someArray[checkRow-3][checkInnerRowUpRight+3]){
-                modalWin();
+                $('.gameTitle').text("The Game Is Over");
+                $(".col0").off("click");
+                $(".col1").off("click");
+                $(".col2").off("click");
+                $(".col3").off("click");
+                $(".col4").off("click");
+                $(".col5").off("click");
+                $(".col6").off("click");
+                victoryTrigger = 1;
+                console.log($(`.row${checkRow} .col${checkInnerRowUpRight}`).css("background-image"));
+                var newBackground = $(`.row${checkRow} .col${checkInnerRowUpRight}`).css("background-image");
+                var newerBackground = newBackground.replace('url(','').replace(')','').replace(/\"/gi, "");
+                console.log(newerBackground);
+                if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Athena.jpg") {
+                    $(`.row${checkRow} .col${checkInnerRowUpRight}`).addClass("athenaWins");
+                    $(`.row${checkRow - 1} .col${checkInnerRowUpRight + 1}`).addClass("athenaWins");
+                    $(`.row${checkRow - 2} .col${checkInnerRowUpRight + 2}`).addClass("athenaWins");
+                    $(`.row${checkRow - 3} .col${checkInnerRowUpRight + 3}`).addClass("athenaWins");
+                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Poseidon.jpg") {
+                    $(`.row${checkRow} .col${checkInnerRowUpRight}`).addClass("poseidonWins");
+                    $(`.row${checkRow - 1} .col${checkInnerRowUpRight + 1}`).addClass("poseidonWins");
+                    $(`.row${checkRow - 2} .col${checkInnerRowUpRight + 2}`).addClass("poseidonWins");
+                    $(`.row${checkRow - 3} .col${checkInnerRowUpRight + 3}`).addClass("poseidonWins");
+                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Artemis.jpg") {
+                    $(`.row${checkRow} .col${checkInnerRowUpRight}`).addClass("artemisWins");
+                    $(`.row${checkRow - 1} .col${checkInnerRowUpRight + 1}`).addClass("artemisWins");
+                    $(`.row${checkRow - 2} .col${checkInnerRowUpRight + 2}`).addClass("artemisWins");
+                    $(`.row${checkRow - 3} .col${checkInnerRowUpRight + 3}`).addClass("artemisWins");
+                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Ares.jpg") {
+                    $(`.row${checkRow} .col${checkInnerRowUpRight}`).addClass("aresWins");
+                    $(`.row${checkRow - 1} .col${checkInnerRowUpRight + 1}`).addClass("aresWins");
+                    $(`.row${checkRow - 2} .col${checkInnerRowUpRight + 2}`).addClass("aresWins");
+                    $(`.row${checkRow - 3} .col${checkInnerRowUpRight + 3}`).addClass("aresWins");
+                }
+                setTimeout(function() {
+                    modalWin();
+                }, 1500);
+                // modalWin();
             }
         }
         for(var checkInnerRowUpLeft = someArray[checkRow].length-1; checkInnerRowUpLeft >=0; checkInnerRowUpLeft--){
             if(someArray[checkRow][checkInnerRowUpLeft] !== null && someArray[checkRow][checkInnerRowUpLeft] === someArray[checkRow-1][checkInnerRowUpLeft-1] && someArray[checkRow-1][checkInnerRowUpLeft-1] === someArray[checkRow-2][checkInnerRowUpLeft-2] && someArray[checkRow-2][checkInnerRowUpLeft-2] === someArray[checkRow-3][checkInnerRowUpLeft-3]){
-                modalWin();
+                $('.gameTitle').text("The Game Is Over");
+                $(".col0").off("click");
+                $(".col1").off("click");
+                $(".col2").off("click");
+                $(".col3").off("click");
+                $(".col4").off("click");
+                $(".col5").off("click");
+                $(".col6").off("click");
+                victoryTrigger = 1;
+                console.log($(`.row${checkRow} .col${checkInnerRowUpLeft}`).css("background-image"));
+                var newBackground = $(`.row${checkRow} .col${checkInnerRowUpLeft}`).css("background-image");
+                var newerBackground = newBackground.replace('url(','').replace(')','').replace(/\"/gi, "");
+                console.log(newerBackground);
+                if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Athena.jpg") {
+                    $(`.row${checkRow} .col${checkInnerRowUpLeft}`).addClass("athenaWins");
+                    $(`.row${checkRow - 1} .col${checkInnerRowUpLeft - 1}`).addClass("athenaWins");
+                    $(`.row${checkRow - 2} .col${checkInnerRowUpLeft - 2}`).addClass("athenaWins");
+                    $(`.row${checkRow - 3} .col${checkInnerRowUpLeft - 3}`).addClass("athenaWins");
+                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Poseidon.jpg") {
+                    $(`.row${checkRow} .col${checkInnerRowUpLeft}`).addClass("poseidonWins");
+                    $(`.row${checkRow - 1} .col${checkInnerRowUpLeft - 1}`).addClass("poseidonWins");
+                    $(`.row${checkRow - 2} .col${checkInnerRowUpLeft - 2}`).addClass("poseidonWins");
+                    $(`.row${checkRow - 3} .col${checkInnerRowUpLeft - 3}`).addClass("poseidonWins");
+                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Artemis.jpg") {
+                    $(`.row${checkRow} .col${checkInnerRowUpLeft}`).addClass("artemisWins");
+                    $(`.row${checkRow - 1} .col${checkInnerRowUpLeft - 1}`).addClass("artemisWins");
+                    $(`.row${checkRow - 2} .col${checkInnerRowUpLeft - 2}`).addClass("artemisWins");
+                    $(`.row${checkRow - 3} .col${checkInnerRowUpLeft - 3}`).addClass("artemisWins");
+                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Ares.jpg") {
+                    $(`.row${checkRow} .col${checkInnerRowUpLeft}`).addClass("aresWins");
+                    $(`.row${checkRow - 1} .col${checkInnerRowUpLeft - 1}`).addClass("aresWins");
+                    $(`.row${checkRow - 2} .col${checkInnerRowUpLeft - 2}`).addClass("aresWins");
+                    $(`.row${checkRow - 3} .col${checkInnerRowUpLeft - 3}`).addClass("aresWins");
+                }
+                setTimeout(function() {
+                    modalWin();
+                }, 1500);
+                // modalWin();
             }
         }
     }
 }
 
-var drawTrigger = 0;
+
 function checkDraw() {
     var drawCount = 0;
     for(var checkRow = gameArray.length-1; checkRow >= 0; checkRow--){
@@ -352,7 +500,6 @@ function checkDraw() {
 
 /*Win condition checker end */
 //Modal display, hide, and exit functions
-var godVictoryName = null;
 function modalWin() {
     // playChoir()
     victoryTrigger = 1; //disables ai from making actions
@@ -377,7 +524,7 @@ function modalWin() {
     toggleAICount = 0;
 }
 
-function victoryName() { // Function that chooses which player's diety to display 
+function victoryName() { // Function that chooses which player's deity to display
     var nameArray = [$(".ares").css("background-image"), $(".artemis").css("background-image"), $(".athena").css("background-image"), $(".poseidon").css("background-image")];
     var nameArrayCheck = null;
     if (playerSwitch === 1) { //Checks which player won the game
@@ -387,7 +534,7 @@ function victoryName() { // Function that chooses which player's diety to displa
     } else if (playerSwitch === -1) {
         nameArrayCheck = playerThreeGod;
     }
-    if (nameArrayCheck === nameArray[0]) { //checks what diety the player choose to display the matching diety
+    if (nameArrayCheck === nameArray[0]) { //checks what deity the player choose to display the matching deity
         godVictoryName = 'Ares';
     } else if (nameArrayCheck === nameArray[1]) {
         godVictoryName = 'Artemis';
@@ -410,6 +557,10 @@ function resetGame() { //function that resets the game, including player gods an
     firstPowerUpTrigger = 0;
     hadesVictoryToggle = 0;
     $('.col').css('background-image', 'none').removeClass('animated fadeIn');
+    $(".col").removeClass("athenaWins");
+    $(".col").removeClass("aresWins");
+    $(".col").removeClass("artemisWins");
+    $(".col").removeClass("poseidonWins");
     for (var rowCount = 0; rowCount < gameArray.length; rowCount++) {
         for (var colCount = 0; colCount < gameArray[rowCount].length; colCount++) {
             if (gameArray[rowCount][colCount] != null) {
