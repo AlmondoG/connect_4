@@ -302,6 +302,8 @@ function checkWinCondition() {
 }
 
 function checkHorizontalWin(someArray){
+    var winningPlayer = playerSwitch;
+
     for(var checkRow = someArray.length-1; checkRow >= 0; checkRow--){
         for(var checkInnerRow = 0; checkInnerRow < someArray[checkRow].length; checkInnerRow++){
             if(someArray[checkRow][checkInnerRow] != null && someArray[checkRow][checkInnerRow] === someArray[checkRow][checkInnerRow + 1] && someArray[checkRow][checkInnerRow + 1] === someArray[checkRow][checkInnerRow + 2] && someArray[checkRow][checkInnerRow + 2] === someArray[checkRow][checkInnerRow + 3]){
@@ -340,7 +342,7 @@ function checkHorizontalWin(someArray){
                     $(`.row${checkRow} .col${checkInnerRow + 3}`).addClass("aresWins");
                 }
                 setTimeout(function() {
-                    modalWin();
+                    modalWin(winningPlayer);
                 }, 1500);
                 // modalWin();
             }
@@ -348,6 +350,8 @@ function checkHorizontalWin(someArray){
     }
 }
 function checkVerticalWin(someArray){
+    var winningPlayer = playerSwitch;
+
     for(var checkRow = someArray.length-1; checkRow >= 4; checkRow--){
         for(var checkInnerRow = 0; checkInnerRow < someArray[checkRow].length; checkInnerRow++){
             if(someArray[checkRow][checkInnerRow] != null && someArray[checkRow][checkInnerRow] === someArray[checkRow-1][checkInnerRow] && someArray[checkRow-1][checkInnerRow] === someArray[checkRow-2][checkInnerRow] && someArray[checkRow-2][checkInnerRow] === someArray[checkRow-3][checkInnerRow]){
@@ -386,7 +390,7 @@ function checkVerticalWin(someArray){
                     $(`.row${checkRow - 3} .col${checkInnerRow}`).addClass("aresWins");
                 }
                 setTimeout(function() {
-                    modalWin();
+                    modalWin(winningPlayer);
                 }, 1500);
                 // modalWin();
             }
@@ -394,6 +398,8 @@ function checkVerticalWin(someArray){
     }
 }
 function checkDiagonalWin(someArray){
+    var winningPlayer = playerSwitch;
+
     for(var checkRow = someArray.length-1; checkRow >= 4; checkRow--){
         for(var checkInnerRowUpRight = 0; checkInnerRowUpRight < 4; checkInnerRowUpRight++){
             if(someArray[checkRow][checkInnerRowUpRight] !== null && someArray[checkRow][checkInnerRowUpRight] === someArray[checkRow-1][checkInnerRowUpRight+1] && someArray[checkRow-1][checkInnerRowUpRight+1] === someArray[checkRow-2][checkInnerRowUpRight+2] && someArray[checkRow-2][checkInnerRowUpRight+2] === someArray[checkRow-3][checkInnerRowUpRight+3]){
@@ -432,7 +438,7 @@ function checkDiagonalWin(someArray){
                     $(`.row${checkRow - 3} .col${checkInnerRowUpRight + 3}`).addClass("aresWins");
                 }
                 setTimeout(function() {
-                    modalWin();
+                    modalWin(winningPlayer);
                 }, 1500);
                 // modalWin();
             }
@@ -474,7 +480,7 @@ function checkDiagonalWin(someArray){
                     $(`.row${checkRow - 3} .col${checkInnerRowUpLeft - 3}`).addClass("aresWins");
                 }
                 setTimeout(function() {
-                    modalWin();
+                    modalWin(winningPlayer);
                 }, 1500);
                 // modalWin();
             }
@@ -500,38 +506,39 @@ function checkDraw() {
 
 /*Win condition checker end */
 //Modal display, hide, and exit functions
-function modalWin() {
+function modalWin(winningPlayer) {
+    var playerSwitchLocal = winningPlayer;
     // playChoir()
     victoryTrigger = 1; //disables ai from making actions
     $('.gameTitle').text("The Game Is Over");
-    victoryName();
+    victoryName(playerSwitchLocal);
     if (drawTrigger === 1 ) {
         $(".modal-shadow").removeClass("hidden-modal");
         $(".modal-text").text("Draw!!!");
-    } else if (playerSwitch === 1) {
+    } else if (playerSwitchLocal === 1) {
         $(".modal-shadow").removeClass("hidden-modal");
         $(".modal-text").text(godVictoryName + " Wins!!!");
-    } else if (playerSwitch === 0 && toggleAICount === 1) {
+    } else if (playerSwitchLocal === 0 && toggleAICount === 1) {
         $(".modal-shadow").removeClass("hidden-modal");
         $(".modal-text").text("The Gods Win!!!");
-    } else if (playerSwitch === 0 && toggleAICount === 0) {
+    } else if (playerSwitchLocal === 0 && toggleAICount === 0) {
         $(".modal-shadow").removeClass("hidden-modal");
         $(".modal-text").text(godVictoryName + " Wins!!!");
-    } else if (playerSwitch === -1) {
+    } else if (playerSwitchLocal === -1) {
         $(".modal-shadow").removeClass("hidden-modal");
         $(".modal-text").text(godVictoryName + " Wins!!!");
     }
     toggleAICount = 0;
 }
 
-function victoryName() { // Function that chooses which player's deity to display
+function victoryName(playerSwitchNum) { // Function that chooses which player's deity to display
     var nameArray = [$(".ares").css("background-image"), $(".artemis").css("background-image"), $(".athena").css("background-image"), $(".poseidon").css("background-image")];
     var nameArrayCheck = null;
-    if (playerSwitch === 1) { //Checks which player won the game
+    if (playerSwitchNum === 1) { //Checks which player won the game
         nameArrayCheck = playerOneGod;
-    } else if (playerSwitch === 0) {
+    } else if (playerSwitchNum === 0) {
         nameArrayCheck = playerTwoGod;
-    } else if (playerSwitch === -1) {
+    } else if (playerSwitchNum === -1) {
         nameArrayCheck = playerThreeGod;
     }
     if (nameArrayCheck === nameArray[0]) { //checks what deity the player choose to display the matching deity

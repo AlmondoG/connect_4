@@ -490,3 +490,13 @@ body {
 .artemisWins {
     box-shadow: 0 0 25px 10px orange;
 }
+
+
+@media (max-width: 350px) {
+    .mainTitle {
+        font-size: 2em;
+    }
+    .title {
+        font-size: 1.5em;
+    }
+}
