@@ -310,7 +310,7 @@ body {
     font-size: 2em;
     font-weight: bold;
     text-shadow: 2px 2px 8px black;
-    top: 70%;
+    top: 80%;
     transform: translate( -50%, -50% );
     background-color: black;
     border-radius: 50px;
@@ -378,13 +378,12 @@ body {
     left: 50%;
     top: 50%;
     min-width: 55%;
-    min-height: 55%;
+    /*min-height: 55%;*/
     transform: translate( -50%, -50% );
     border-radius: 45px;
 }
 
 .hades-text{
-    height: 15%;
     width: 100%;
     color: white;
     text-align: center;
@@ -437,7 +436,7 @@ body {
 }
 
 
-@media (max-width: 790px) {
+@media (max-width: 767px) {
     .toggleAI, .togglePlayerNumber, .resetButton {
         font-size: 1em;
     }
@@ -445,22 +444,16 @@ body {
 
 @media (max-width: 547px) {
     .toggleAI, .togglePlayerNumber, .resetButton {
-        font-size: 0.5em;
+        font-size: 0.75em;
     }
     .name {
-        font-size: 1em;
+        font-size: 1.5em;
     }
 }
 
 @media (max-width: 1117px) {
     .reset {
         font-size: 1.5em;
-    }
-}
-
-@media (max-width: 720px) {
-    .reset {
-        font-size: 1em;
     }
 }
 
@@ -498,5 +491,44 @@ body {
     }
     .title {
         font-size: 1.5em;
+    }
+}
+
+@media (max-width: 1037px) {
+    .hades-text {
+        font-size: 35px;
+    }
+}
+
+@media (max-width: 912px) {
+    .hades-text {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 868px) {
+    .hades-box {
+        min-width: 500px;
+    }
+}
+
+@media (max-width: 502px) {
+    .hades-box {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 473px) {
+    .hades-text {
+        font-size: 150%;
+    }
+    .reset {
+        font-size: 125%;
+    }
+}
+
+@media (max-width: 766px) {
+    .ares, .artemis, .athena, .poseidon {
+        padding: 36%;
     }
 }

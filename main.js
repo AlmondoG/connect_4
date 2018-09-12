@@ -92,6 +92,7 @@ var playerModeToggle = 1;
 var toggleAICount = 0;
 var drawTrigger = 0;
 var godVictoryName = null;
+var godTurnName = null;
 
 /* Game modes start */
 function togglePlayerMode() {
@@ -141,6 +142,9 @@ function playerGod() {
     $(this).off("click");
     $(".toggleAI, .togglePlayerNumber").hide();
     $(".resetButton").show();
+    if (godTurnName === null) {
+        turnName(playerSwitch);
+    };
     playerSwitch--;
     if (playerSwitch === 1 && toggleAICount === 0) { //if toggle ai === 0, then it's off. if toggle ai ===1, it's on
         $('.title').text("Player Two: Choose Your Deity");
@@ -153,7 +157,7 @@ function playerGod() {
     if (playerOneGod != null && playerTwoGod != null && playerThreeGod != null && toggleAICount === 0 || playerOneGod != null && playerTwoGod != null && toggleAICount === 1 || playerOneGod != null && playerTwoGod != null && playerModeToggle === 1) {
         $('.choose-god-page').hide();
         $('.game_area').show();
-        $('.gameTitle').text("Player One's Turn");
+        $('.gameTitle').text(`${godTurnName} Turn`);
         playerSwitch = 2;
     }
 }
@@ -190,11 +194,16 @@ function addToGridArray() { //function that stores respective player's number in
         }
     }
     playerSwitch--;
+    if (playerSwitch === 2 || playerSwitch === 1) {
+        turnName(playerSwitch);
+    } else if (playerSwitch === 0 && playerModeToggle === 0) {
+        threePlayerTurnName(playerSwitch);
+    }
     checkPowerUpCondition();
     if (playerSwitch === 1){
-        $('.gameTitle').text("Player Two's Turn");
+        $('.gameTitle').text(`${godTurnName} Turn`);
     } else if (playerSwitch === 0 && playerModeToggle === 0){
-        $('.gameTitle').text("Player Three's Turn");
+        $('.gameTitle').text(`${godTurnName} Turn`);
     }
     addGodToGrid();
     if (hadesVictoryToggle === 0) {
@@ -205,7 +214,8 @@ function addToGridArray() { //function that stores respective player's number in
     }
     if (playerSwitch === -1 || playerSwitch === 0 && toggleAICount === 1 || playerSwitch === 0 && playerModeToggle === 1) {
         playerSwitch = 2;
-        $('.gameTitle').text("Player One's Turn");
+        turnName(playerSwitch);
+        $('.gameTitle').text(`${godTurnName} Turn`);
     }
 }
 
@@ -563,6 +573,7 @@ function resetGame() { //function that resets the game, including player gods an
     drawTrigger = 0;
     firstPowerUpTrigger = 0;
     hadesVictoryToggle = 0;
+    godTurnName = null;
     $('.col').css('background-image', 'none').removeClass('animated fadeIn');
     $(".col").removeClass("athenaWins");
     $(".col").removeClass("aresWins");
@@ -596,4 +607,45 @@ function playFire() {
 }
 function playChoir() {
     $(".choir")[0].play();
+}
+
+
+function turnName(playerSwitchNum) { // Function that chooses which player's deity to display
+    var nameArray = [$(".ares").css("background-image"), $(".artemis").css("background-image"), $(".athena").css("background-image"), $(".poseidon").css("background-image")];
+    var nameArrayCheck = null;
+    if (playerSwitchNum === 2) { //Checks which player's turn it is
+        nameArrayCheck = playerOneGod;
+    } else if (playerSwitchNum === 1) {
+        nameArrayCheck = playerTwoGod;
+    }
+    if (nameArrayCheck === nameArray[0]) { //checks what deity the player choose to display the matching deity
+        godTurnName = "Ares'";
+    } else if (nameArrayCheck === nameArray[1]) {
+        godTurnName = "Artemis'";
+    } else if (nameArrayCheck === nameArray[2]) {
+        godTurnName = "Athena's";
+    } else if (nameArrayCheck === nameArray[3]) {
+        godTurnName = "Poseidon's";
+    }
+}
+
+function threePlayerTurnName(playerSwitchNum) {
+    var nameArray = [$(".ares").css("background-image"), $(".artemis").css("background-image"), $(".athena").css("background-image"), $(".poseidon").css("background-image")];
+    var nameArrayCheck = null;
+    if (playerSwitchNum === 2) {
+        nameArrayCheck = playerOneGod;
+    } else if (playerSwitchNum === 1) {
+        nameArrayCheck = playerTwoGod;
+    } else if (playerSwitchNum === 0) {
+        nameArrayCheck = playerThreeGod;
+    }
+    if (nameArrayCheck === nameArray[0]) {
+        godTurnName = "Ares'";
+    } else if (nameArrayCheck === nameArray[1]) {
+        godTurnName = "Artemis'";
+    } else if (nameArrayCheck === nameArray[2]) {
+        godTurnName = "Athena's";
+    } else if (nameArrayCheck === nameArray[3]) {
+        godTurnName = "Poseidon's";
+    }
 }
