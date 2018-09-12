@@ -330,22 +330,22 @@ function checkHorizontalWin(someArray){
                 var newBackground = $(`.row${checkRow} .col${checkInnerRow}`).css("background-image");
                 var newerBackground = newBackground.replace('url(','').replace(')','').replace(/\"/gi, "");
                 console.log(newerBackground);
-                if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Athena.jpg") {
+                if(newerBackground === "https://aghanimati.com/ancient-greek-connect/Images/Athena.jpg") {
                     $(`.row${checkRow} .col${checkInnerRow}`).addClass("athenaWins");
                     $(`.row${checkRow} .col${checkInnerRow + 1}`).addClass("athenaWins");
                     $(`.row${checkRow} .col${checkInnerRow + 2}`).addClass("athenaWins");
                     $(`.row${checkRow} .col${checkInnerRow + 3}`).addClass("athenaWins");
-                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Poseidon.jpg") {
+                } else if(newerBackground === "https://aghanimati.com/ancient-greek-connect/Images/Poseidon.jpg") {
                     $(`.row${checkRow} .col${checkInnerRow}`).addClass("poseidonWins");
                     $(`.row${checkRow} .col${checkInnerRow + 1}`).addClass("poseidonWins");
                     $(`.row${checkRow} .col${checkInnerRow + 2}`).addClass("poseidonWins");
                     $(`.row${checkRow} .col${checkInnerRow + 3}`).addClass("poseidonWins");
-                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Artemis.jpg") {
+                } else if(newerBackground === "https://aghanimati.com/ancient-greek-connect/Images/Artemis.jpg") {
                     $(`.row${checkRow} .col${checkInnerRow}`).addClass("artemisWins");
                     $(`.row${checkRow} .col${checkInnerRow + 1}`).addClass("artemisWins");
                     $(`.row${checkRow} .col${checkInnerRow + 2}`).addClass("artemisWins");
                     $(`.row${checkRow} .col${checkInnerRow + 3}`).addClass("artemisWins");
-                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Ares.jpg") {
+                } else if(newerBackground === "https://aghanimati.com/ancient-greek-connect/Images/Ares.jpg") {
                     $(`.row${checkRow} .col${checkInnerRow}`).addClass("aresWins");
                     $(`.row${checkRow} .col${checkInnerRow + 1}`).addClass("aresWins");
                     $(`.row${checkRow} .col${checkInnerRow + 2}`).addClass("aresWins");
@@ -378,22 +378,22 @@ function checkVerticalWin(someArray){
                 var newBackground = $(`.row${checkRow} .col${checkInnerRow}`).css("background-image");
                 var newerBackground = newBackground.replace('url(','').replace(')','').replace(/\"/gi, "");
                 console.log(newerBackground);
-                if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Athena.jpg") {
+                if(newerBackground === "https://aghanimati.com/ancient-greek-connect/Images/Athena.jpg") {
                     $(`.row${checkRow} .col${checkInnerRow}`).addClass("athenaWins");
                     $(`.row${checkRow - 1} .col${checkInnerRow}`).addClass("athenaWins");
                     $(`.row${checkRow - 2} .col${checkInnerRow}`).addClass("athenaWins");
                     $(`.row${checkRow - 3} .col${checkInnerRow}`).addClass("athenaWins");
-                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Poseidon.jpg") {
+                } else if(newerBackground === "https://aghanimati.com/ancient-greek-connect/Images/Poseidon.jpg") {
                     $(`.row${checkRow} .col${checkInnerRow}`).addClass("poseidonWins");
                     $(`.row${checkRow - 1} .col${checkInnerRow}`).addClass("poseidonWins");
                     $(`.row${checkRow - 2} .col${checkInnerRow}`).addClass("poseidonWins");
                     $(`.row${checkRow - 3} .col${checkInnerRow}`).addClass("poseidonWins");
-                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Artemis.jpg") {
+                } else if(newerBackground === "https://aghanimati.com/ancient-greek-connect/Images/Artemis.jpg") {
                     $(`.row${checkRow} .col${checkInnerRow}`).addClass("artemisWins");
                     $(`.row${checkRow - 1} .col${checkInnerRow}`).addClass("artemisWins");
                     $(`.row${checkRow - 2} .col${checkInnerRow}`).addClass("artemisWins");
                     $(`.row${checkRow - 3} .col${checkInnerRow}`).addClass("artemisWins");
-                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Ares.jpg") {
+                } else if(newerBackground === "https://aghanimati.com/ancient-greek-connect/Images/Ares.jpg") {
                     $(`.row${checkRow} .col${checkInnerRow}`).addClass("aresWins");
                     $(`.row${checkRow - 1} .col${checkInnerRow}`).addClass("aresWins");
                     $(`.row${checkRow - 2} .col${checkInnerRow}`).addClass("aresWins");
@@ -426,22 +426,22 @@ function checkDiagonalWin(someArray){
                 var newBackground = $(`.row${checkRow} .col${checkInnerRowUpRight}`).css("background-image");
                 var newerBackground = newBackground.replace('url(','').replace(')','').replace(/\"/gi, "");
                 console.log(newerBackground);
-                if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Athena.jpg") {
+                if(newerBackground === "https://aghanimati.com/ancient-greek-connect/Images/Athena.jpg") {
                     $(`.row${checkRow} .col${checkInnerRowUpRight}`).addClass("athenaWins");
                     $(`.row${checkRow - 1} .col${checkInnerRowUpRight + 1}`).addClass("athenaWins");
                     $(`.row${checkRow - 2} .col${checkInnerRowUpRight + 2}`).addClass("athenaWins");
                     $(`.row${checkRow - 3} .col${checkInnerRowUpRight + 3}`).addClass("athenaWins");
-                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Poseidon.jpg") {
+                } else if(newerBackground === "https://aghanimati.com/ancient-greek-connect/Images/Poseidon.jpg") {
                     $(`.row${checkRow} .col${checkInnerRowUpRight}`).addClass("poseidonWins");
                     $(`.row${checkRow - 1} .col${checkInnerRowUpRight + 1}`).addClass("poseidonWins");
                     $(`.row${checkRow - 2} .col${checkInnerRowUpRight + 2}`).addClass("poseidonWins");
                     $(`.row${checkRow - 3} .col${checkInnerRowUpRight + 3}`).addClass("poseidonWins");
-                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Artemis.jpg") {
+                } else if(newerBackground === "https://aghanimati.com/ancient-greek-connect/Images/Artemis.jpg") {
                     $(`.row${checkRow} .col${checkInnerRowUpRight}`).addClass("artemisWins");
                     $(`.row${checkRow - 1} .col${checkInnerRowUpRight + 1}`).addClass("artemisWins");
                     $(`.row${checkRow - 2} .col${checkInnerRowUpRight + 2}`).addClass("artemisWins");
                     $(`.row${checkRow - 3} .col${checkInnerRowUpRight + 3}`).addClass("artemisWins");
-                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Ares.jpg") {
+                } else if(newerBackground === "https://aghanimati.com/ancient-greek-connect/Images/Ares.jpg") {
                     $(`.row${checkRow} .col${checkInnerRowUpRight}`).addClass("aresWins");
                     $(`.row${checkRow - 1} .col${checkInnerRowUpRight + 1}`).addClass("aresWins");
                     $(`.row${checkRow - 2} .col${checkInnerRowUpRight + 2}`).addClass("aresWins");
@@ -468,22 +468,22 @@ function checkDiagonalWin(someArray){
                 var newBackground = $(`.row${checkRow} .col${checkInnerRowUpLeft}`).css("background-image");
                 var newerBackground = newBackground.replace('url(','').replace(')','').replace(/\"/gi, "");
                 console.log(newerBackground);
-                if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Athena.jpg") {
+                if(newerBackground === "https://aghanimati.com/ancient-greek-connect/Images/Athena.jpg") {
                     $(`.row${checkRow} .col${checkInnerRowUpLeft}`).addClass("athenaWins");
                     $(`.row${checkRow - 1} .col${checkInnerRowUpLeft - 1}`).addClass("athenaWins");
                     $(`.row${checkRow - 2} .col${checkInnerRowUpLeft - 2}`).addClass("athenaWins");
                     $(`.row${checkRow - 3} .col${checkInnerRowUpLeft - 3}`).addClass("athenaWins");
-                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Poseidon.jpg") {
+                } else if(newerBackground === "https://aghanimati.com/ancient-greek-connect/Images/Poseidon.jpg") {
                     $(`.row${checkRow} .col${checkInnerRowUpLeft}`).addClass("poseidonWins");
                     $(`.row${checkRow - 1} .col${checkInnerRowUpLeft - 1}`).addClass("poseidonWins");
                     $(`.row${checkRow - 2} .col${checkInnerRowUpLeft - 2}`).addClass("poseidonWins");
                     $(`.row${checkRow - 3} .col${checkInnerRowUpLeft - 3}`).addClass("poseidonWins");
-                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Artemis.jpg") {
+                } else if(newerBackground === "https://aghanimati.com/ancient-greek-connect/Images/Artemis.jpg") {
                     $(`.row${checkRow} .col${checkInnerRowUpLeft}`).addClass("artemisWins");
                     $(`.row${checkRow - 1} .col${checkInnerRowUpLeft - 1}`).addClass("artemisWins");
                     $(`.row${checkRow - 2} .col${checkInnerRowUpLeft - 2}`).addClass("artemisWins");
                     $(`.row${checkRow - 3} .col${checkInnerRowUpLeft - 3}`).addClass("artemisWins");
-                } else if(newerBackground === "http://localhost:63342/lfz/418_connectathon/Images/Ares.jpg") {
+                } else if(newerBackground === "https://aghanimati.com/ancient-greek-connect/Images/Ares.jpg") {
                     $(`.row${checkRow} .col${checkInnerRowUpLeft}`).addClass("aresWins");
                     $(`.row${checkRow - 1} .col${checkInnerRowUpLeft - 1}`).addClass("aresWins");
                     $(`.row${checkRow - 2} .col${checkInnerRowUpLeft - 2}`).addClass("aresWins");
