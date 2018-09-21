@@ -3,8 +3,6 @@
 }
 
 body {
-    /*width: 100vw;*/
-    /*height: 100vh;*/
     margin: 0;
     background-image: url('images/mt_olympus_background.jpg');
     background-repeat: no-repeat;
@@ -199,7 +197,6 @@ body {
 }
 
 
-
 .god-container {
     display: inline-block;
     height: 100%;
@@ -236,7 +233,7 @@ body {
 
 .ares {
     background: url("./Images/Ares.jpg") no-repeat center;
-    background-size: cover;
+    background-size: 103%;
 }
 
 .artemis {
@@ -253,13 +250,14 @@ body {
 
 .poseidon {
     background: url("./Images/Poseidon.jpg") no-repeat center;
-    background-size: cover;
     background-position: 10%;
+    background-size: 145%;
 }
 
 .gray {
     background-color:black;
     opacity: .5;
+    cursor: auto;
 }
 
 .game_area {
@@ -530,5 +528,43 @@ body {
 @media (max-width: 766px) {
     .ares, .artemis, .athena, .poseidon {
         padding: 36%;
+    }
+}
+
+@media (max-height: 1383px) {
+    body {
+        background-size: cover;
+    }
+}
+
+@media (max-width: 1025px) and (max-height: 1367px){
+    body {
+        background-size: cover;
+    }
+}
+
+@media (max-width: 769px) and (max-height: 1025px) {
+    body {
+        background-size: initial;
+    }
+}
+
+
+@media (max-height: 415px) {
+    .gameGrid {
+        height: 75vmin;
+        width: 85vmin;
+    }
+    .artemis, .ares, .poseidon, .athena {
+        padding: 10%;
+    }
+    .toggleAI, .togglePlayerNumber, .resetButton {
+        font-size: 0.75em;
+    }
+    .mainTitle {
+        font-size: 2em;
+    }
+    .title {
+        font-size: 1.5em;
     }
 }

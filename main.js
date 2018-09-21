@@ -64,7 +64,7 @@ function readyPageFunctions () {
     });
 
     $(".resetButton").on('click', function() {
-        resetGame();
+        resetButtonReset();
     });
 
     $('.col').hover(highlight, unHighlight);
@@ -96,7 +96,7 @@ var godTurnName = null;
 
 /* Game modes start */
 function togglePlayerMode() {
-    $('.title').text("Third Player Summoned. Player One: Select Your Deity.")
+    $('.title').text("Third Player Summoned. Player One: Select Your Deity.");
     $('.togglePlayerNumber').text("TWO PLAYER MODE");
     playerModeToggle = 1 - playerModeToggle; //if playerModeToggle === 0; three player mode activates; else two player mode;
     if (playerModeToggle === 1) {
@@ -183,16 +183,22 @@ function addToGridArray() { //function that stores respective player's number in
         if (gameArray[rowCount][columnNumber] === null) {
             if (playerSwitch === 2) {
                 gameArray[rowCount][columnNumber] = 2;
-                break;
+                // break;
             } else if (playerSwitch === 1) {
                 gameArray[rowCount][columnNumber] = 1;
-                break;
+                // break;
             } else if (playerSwitch === 0 && playerModeToggle === 0) {
                 gameArray[rowCount][columnNumber] = 0;
-                break;
+                // break;
             }
+            togglePlayers();
+            break;
         }
     }
+
+}
+
+function togglePlayers() {
     playerSwitch--;
     if (playerSwitch === 2 || playerSwitch === 1) {
         turnName(playerSwitch);
@@ -209,7 +215,7 @@ function addToGridArray() { //function that stores respective player's number in
     if (hadesVictoryToggle === 0) {
         checkWinCondition();
     }
-    if (toggleAICount === 1 && playerSwitch === 1) { //if AI mode is on, runs function that has AI "choose" a column
+    if (toggleAICount === 1 && playerSwitch === 1 && victoryTrigger !== 1) { //if AI mode is on, runs function that has AI "choose" a column
         aiGridSelect();
     }
     if (playerSwitch === -1 || playerSwitch === 0 && toggleAICount === 1 || playerSwitch === 0 && playerModeToggle === 1) {
@@ -224,7 +230,7 @@ function aiGridSelect() { //function that allows AI to randomly select a column
     var randomColumnNum = Math.round((Math.random() * 6 ));
     columnNumber = randomColumnNum;
     $('.gameTitle').text("Turn of the Gods");
-    setTimeout(aiToGameArray, 2000);
+    setTimeout(aiToGameArray, 1500);
 }
 
 function aiToGameArray() {
@@ -538,7 +544,6 @@ function modalWin(winningPlayer) {
         $(".modal-shadow").removeClass("hidden-modal");
         $(".modal-text").text(godVictoryName + " Wins!!!");
     }
-    toggleAICount = 0;
 }
 
 function victoryName(playerSwitchNum) { // Function that chooses which player's deity to display
@@ -563,39 +568,108 @@ function victoryName(playerSwitchNum) { // Function that chooses which player's 
 }
 
 function resetGame() { //function that resets the game, including player gods and game grid
-    playerOneGod = null;
-    playerTwoGod = null;
-    playerThreeGod = null;
-    playerSwitch = 2;
-    toggleAICount = 0;
-    victoryTrigger = 0;
-    playerModeToggle = 1;
-    drawTrigger = 0;
-    firstPowerUpTrigger = 0;
-    hadesVictoryToggle = 0;
-    godTurnName = null;
-    $('.col').css('background-image', 'none').removeClass('animated fadeIn');
-    $(".col").removeClass("athenaWins");
-    $(".col").removeClass("aresWins");
-    $(".col").removeClass("artemisWins");
-    $(".col").removeClass("poseidonWins");
-    for (var rowCount = 0; rowCount < gameArray.length; rowCount++) {
-        for (var colCount = 0; colCount < gameArray[rowCount].length; colCount++) {
-            if (gameArray[rowCount][colCount] != null) {
-                gameArray[rowCount][colCount] = null;
+    if (playerModeToggle === 0 && toggleAICount === 0) {
+        playerOneGod = null;
+        playerTwoGod = null;
+        playerThreeGod = null;
+        playerSwitch = 2;
+        toggleAICount = 0;
+        victoryTrigger = 0;
+        playerModeToggle = 1;
+        drawTrigger = 0;
+        firstPowerUpTrigger = 0;
+        hadesVictoryToggle = 0;
+        godTurnName = null;
+        $('.col').css('background-image', 'none').removeClass('animated fadeIn');
+        $(".col").removeClass("athenaWins");
+        $(".col").removeClass("aresWins");
+        $(".col").removeClass("artemisWins");
+        $(".col").removeClass("poseidonWins");
+        for (var rowCount = 0; rowCount < gameArray.length; rowCount++) {
+            for (var colCount = 0; colCount < gameArray[rowCount].length; colCount++) {
+                if (gameArray[rowCount][colCount] != null) {
+                    gameArray[rowCount][colCount] = null;
+                }
             }
         }
+        $('.ares, .artemis, .athena, .poseidon, .toggleAI, .togglePlayerNumber, .col').off('click').removeClass("gray"); //removes all click handlers
+        readyPageFunctions();   //re-adds all click handlers
+        $(".modal-shadow").addClass("hidden-modal");
+        $('.choose-god-page').show();
+        $('.game_area').hide();
+        $(".resetButton").hide();
+        $('.hades-modal-shadow').addClass('hidden-modal');
+        togglePlayerMode();
+        $(".toggleAI, .togglePlayerNumber").show();
     }
-    $('.ares, .artemis, .athena, .poseidon, .toggleAI, .togglePlayerNumber, .col').off('click').removeClass("gray"); //removes all click handlers
-    readyPageFunctions();   //re-adds all click handlers
-    $(".modal-shadow").addClass("hidden-modal");
-    $('.choose-god-page').show();
-    $('.game_area').hide();
-    $(".resetButton").hide();
-    $('.title').text("Player One: Choose Your Diety");
-    $('.hades-modal-shadow').addClass('hidden-modal');
-    $(".toggleAI, .togglePlayerNumber").show();
-    $('.togglePlayerNumber').text("THREE PLAYER MODE");
+    if (playerModeToggle === 1 && toggleAICount === 1) {
+        playerOneGod = null;
+        playerTwoGod = null;
+        playerThreeGod = null;
+        playerSwitch = 2;
+        toggleAICount = 0;
+        victoryTrigger = 0;
+        playerModeToggle = 1;
+        drawTrigger = 0;
+        firstPowerUpTrigger = 0;
+        hadesVictoryToggle = 0;
+        godTurnName = null;
+        $('.col').css('background-image', 'none').removeClass('animated fadeIn');
+        $(".col").removeClass("athenaWins");
+        $(".col").removeClass("aresWins");
+        $(".col").removeClass("artemisWins");
+        $(".col").removeClass("poseidonWins");
+        for (var rowCount = 0; rowCount < gameArray.length; rowCount++) {
+            for (var colCount = 0; colCount < gameArray[rowCount].length; colCount++) {
+                if (gameArray[rowCount][colCount] != null) {
+                    gameArray[rowCount][colCount] = null;
+                }
+            }
+        }
+        $('.ares, .artemis, .athena, .poseidon, .toggleAI, .togglePlayerNumber, .col').off('click').removeClass("gray"); //removes all click handlers
+        readyPageFunctions();   //re-adds all click handlers
+        $(".modal-shadow").addClass("hidden-modal");
+        $('.choose-god-page').show();
+        $('.game_area').hide();
+        $(".resetButton").hide();
+        $('.hades-modal-shadow').addClass('hidden-modal');
+        toggleAI();
+    }
+    if (playerModeToggle === 1 && toggleAICount === 0) {
+        playerOneGod = null;
+        playerTwoGod = null;
+        playerThreeGod = null;
+        playerSwitch = 2;
+        toggleAICount = 0;
+        victoryTrigger = 0;
+        playerModeToggle = 1;
+        drawTrigger = 0;
+        firstPowerUpTrigger = 0;
+        hadesVictoryToggle = 0;
+        godTurnName = null;
+        $('.col').css('background-image', 'none').removeClass('animated fadeIn');
+        $(".col").removeClass("athenaWins");
+        $(".col").removeClass("aresWins");
+        $(".col").removeClass("artemisWins");
+        $(".col").removeClass("poseidonWins");
+        for (var rowCount = 0; rowCount < gameArray.length; rowCount++) {
+            for (var colCount = 0; colCount < gameArray[rowCount].length; colCount++) {
+                if (gameArray[rowCount][colCount] != null) {
+                    gameArray[rowCount][colCount] = null;
+                }
+            }
+        }
+        $('.ares, .artemis, .athena, .poseidon, .toggleAI, .togglePlayerNumber, .col').off('click').removeClass("gray"); //removes all click handlers
+        readyPageFunctions();   //re-adds all click handlers
+        $(".modal-shadow").addClass("hidden-modal");
+        $('.choose-god-page').show();
+        $('.game_area').hide();
+        $(".resetButton").hide();
+        $('.title').text("Player One: Choose Your Diety");
+        $('.hades-modal-shadow').addClass('hidden-modal');
+        $(".toggleAI, .togglePlayerNumber").show();
+        $('.togglePlayerNumber').text("THREE PLAYER MODE");
+    }
 }
 
 function playScream() {
@@ -648,4 +722,40 @@ function threePlayerTurnName(playerSwitchNum) {
     } else if (nameArrayCheck === nameArray[3]) {
         godTurnName = "Poseidon's";
     }
+}
+
+function resetButtonReset() {
+    playerOneGod = null;
+    playerTwoGod = null;
+    playerThreeGod = null;
+    playerSwitch = 2;
+    toggleAICount = 0;
+    victoryTrigger = 0;
+    playerModeToggle = 1;
+    drawTrigger = 0;
+    firstPowerUpTrigger = 0;
+    hadesVictoryToggle = 0;
+    godTurnName = null;
+    $('.col').css('background-image', 'none').removeClass('animated fadeIn');
+    $(".col").removeClass("athenaWins");
+    $(".col").removeClass("aresWins");
+    $(".col").removeClass("artemisWins");
+    $(".col").removeClass("poseidonWins");
+    for (var rowCount = 0; rowCount < gameArray.length; rowCount++) {
+        for (var colCount = 0; colCount < gameArray[rowCount].length; colCount++) {
+            if (gameArray[rowCount][colCount] != null) {
+                gameArray[rowCount][colCount] = null;
+            }
+        }
+    }
+    $('.ares, .artemis, .athena, .poseidon, .toggleAI, .togglePlayerNumber, .col').off('click').removeClass("gray"); //removes all click handlers
+    readyPageFunctions();   //re-adds all click handlers
+    $(".modal-shadow").addClass("hidden-modal");
+    $('.choose-god-page').show();
+    $('.game_area').hide();
+    $(".resetButton").hide();
+    $('.title').text("Player One: Choose Your Diety");
+    $('.hades-modal-shadow').addClass('hidden-modal');
+    $(".toggleAI, .togglePlayerNumber").show();
+    $('.togglePlayerNumber').text("THREE PLAYER MODE");
 }
