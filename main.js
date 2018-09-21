@@ -235,7 +235,60 @@ function aiGridSelect() { //function that allows AI to randomly select a column
 
 function aiToGameArray() {
     addToGridArray();
-    readyPageFunctions();
+    // readyPageFunctions();
+    $(".ares").on("click", playerGod);
+    $(".artemis").on("click", playerGod);
+    $(".athena").on("click", playerGod);
+    $(".poseidon").on("click", playerGod);
+
+    $(".col0").on('click', function(){
+        columnNumber = 0;
+        addToGridArray();
+    });
+
+    $(".col1").on('click', function(){
+        columnNumber = 1;
+        addToGridArray();
+    });
+
+    $(".col2").on('click', function(){
+        columnNumber = 2;
+        addToGridArray();
+    });
+
+    $(".col3").on('click', function(){
+        columnNumber = 3;
+        addToGridArray();
+    });
+
+    $(".col4").on('click', function(){
+        columnNumber = 4;
+        addToGridArray();
+    });
+
+    $(".col5").on('click', function(){
+        columnNumber = 5;
+        addToGridArray();
+    });
+
+    $(".col6").on('click', function(){
+        columnNumber = 6;
+        addToGridArray();
+    });
+
+    $(".reset").on('click', function() {
+        resetGame();
+    });
+
+    $(".toggleAI").on('click', function() {
+        toggleAI();
+    });
+
+    $(".togglePlayerNumber").on('click', function() {
+        togglePlayerMode();
+    });
+
+    $('.col').hover(highlight, unHighlight);
 }
 
 function addGodToGrid() { //function that adds player's image to HTML grid depending on gameArray
